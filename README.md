@@ -21,7 +21,7 @@
 
 ###loopDot函数组
 这个函数组主要提供了一个等待进度条的功能，效果如下：
-![loopDot函数组效果][https://github.com/qianyingshuo/Terminal-interactive-UI-Function/blob/master/img/loopDot001.gif]
+![loopDot函数组效果](https://github.com/qianyingshuo/Terminal-interactive-UI-Function/blob/master/img/loopDot001.gif)
 
 ####函数使用
 loopDot函数组主要包含以下函数：
@@ -50,4 +50,5 @@ loopDot函数组主要包含以下函数：
 函数组用到了两个保留的全局变量：
 * DOTNUM
 * DOTPID
+
 不要试图在你的处理逻辑中改变这两个变量，函数暂不支持多线程或者多进程操作。
