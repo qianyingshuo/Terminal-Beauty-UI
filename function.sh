@@ -37,6 +37,15 @@
 # descriper: 这个函数的提供了一个等待进度条的实现方法。参数是点的数量。是整个函数组的核心函数。
 #            这个函数不直接提供给用户使用。
 function loopDot() {
+DOTNUM=0；
+    function loopDotFINISH() {
+        for ((i=0;i < $DOTNUM; i++)); do
+            echo -ne '\b \b';
+        done
+        # 我对trap这个命令理解有限。并不知道为什么不用调用exit，这个进程也会结束。
+        # exit 0;
+    }
+trap loopDotFINISH $DOTNUM SIGINT;
 while true; do
     for ((i=0;i < $1; i++)); do
         ((DOTNUM++))
@@ -51,8 +60,10 @@ while true; do
 done
 }
 
+
+# 真正执行kill的函数，其实是发送SIGINT，不需要参数
 function loopDotKILL(){
-kill -9 $DOTPID;
+kill $DOTPID -p SIGINT;
 # 这特么是玄学，为什么会成为这个样子？用其他的命令来输出，就仍然会有killed输出，用ps -ef 就没有
 # 了，但是只能这么用了。
 ps -ef 
@@ -72,7 +83,4 @@ DOTPID=$!;
 # descriper : 在你的程序逻辑执行完毕后，运行这个函数，然后在输出你想输出的东西。
 function loopDotEND() {
 loopDotKILL 1>/dev/null 2>/dev/null;
-for ((i=0;i <= $DOTNUM; i++)); do
-    echo -ne '\b \b';
-done
 }
