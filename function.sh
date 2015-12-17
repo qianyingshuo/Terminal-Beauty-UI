@@ -65,6 +65,9 @@ DOTPID=$!;
 # descriper : 在你的程序逻辑执行完毕后，运行这个函数，然后在输出你想输出的东西。
 function loopDotEND() {
 kill -9 $DOTPID;
+# 这特么是玄学，为什么会成为这个样子？用其他的命令来输出，就仍然会有killed输出，用ps -ef 就没有
+# 了，但是只能这么用了。
+ps -ef 
 for ((i=0;i <= $DOTNUM; i++)); do
     echo -ne '\b \b';
 done
